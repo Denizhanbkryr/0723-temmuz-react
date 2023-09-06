@@ -59,7 +59,7 @@ const LoginPage = () => {
         id="user-pass"
         type="text"
         name="name"
-        // Controlled Component - 
+        // Controlled Component -
         value={loginFormData.name}
         onChange={inputChangeHandler}
       />
@@ -94,6 +94,26 @@ const LoginPage = () => {
         onChange={inputChangeHandler}
       />
       <br />
+
+      <label htmlFor="gender-male">Male</label>
+      <input
+        id="gender-male"
+        type="radio"
+        name="gender"
+        value="male"
+        onChange={inputChangeHandler}
+      />
+      <br />
+      <label htmlFor="gender-female">Female</label>
+      <input
+        id="gender-female"
+        type="radio"
+        name="gender"
+        value="female"
+        onChange={inputChangeHandler}
+      />
+      <br />
+
       <button
         type="button"
         onClick={() => setLoginFormData(loginFormDataInitial)}

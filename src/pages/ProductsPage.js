@@ -41,7 +41,13 @@ const ProductsPage = ({ products }) => {
               <Button color="primary" onClick={toggle}>
                 Sepete Ekle
               </Button>
-              <Link to={"/products/" + product.id}>İncele</Link>
+              <Link
+                to={"/products/" + product.id}
+                className="ml-2"
+                data-cy="incele-link"
+              >
+                İncele
+              </Link>
             </CardBody>
           </Card>
         ))}

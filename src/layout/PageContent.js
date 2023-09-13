@@ -1,5 +1,5 @@
 import { Route, Switch } from "react-router-dom";
-import CounterPage from "../pages/CounterPage";
+import CounterPage, { PI, name } from "../pages/CounterPage";
 import MainPage from "../pages/MainPage";
 import ProductsPage from "../pages/ProductsPage";
 import ProductsDetailPage from "../pages/ProductsDetailPage";
@@ -7,6 +7,7 @@ import LoginPage from "../pages/LoginPage";
 import CreateProductPage from "../pages/CreateProductPage";
 
 const PageContent = ({ userName, products }) => {
+  console.log(PI)
   return (
     // Page Componentleri
     <div className="page-content">

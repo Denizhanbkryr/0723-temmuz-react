@@ -18,6 +18,12 @@ const productDataInitial = {
   stock: 0,
 };
 
+// Static Test
+// Kod yazımı esnasında yapılan hata kontrollerine linting deniyor
+// JS linting işlemini yapan uygulama ESLint
+// let productDataInitial = "qasd";
+// AirBnb Eslint Kuralları
+
 const ProductFormYup = () => {
   const [productData, setProductData] = useState(productDataInitial);
   const [formErrors, setFormErrors] = useState({
@@ -104,6 +110,7 @@ const ProductFormYup = () => {
           onChange={inputChangeHandler}
           value={productData.description}
           invalid={!!formErrors.description}
+          data-cy="desc-input"
         />
         <FormFeedback>{formErrors.description}</FormFeedback>
       </FormGroup>

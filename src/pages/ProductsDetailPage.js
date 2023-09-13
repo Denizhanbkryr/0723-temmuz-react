@@ -33,12 +33,12 @@ const ProductsDetailPage = ({ products }) => {
         <Button color="secondary" onClick={navBack}>
           {"<"}
         </Button>
-        Products Detail Page: {productId}
+        <span data-cy="detail-header">Products Detail Page:</span> {productId}
       </h2>
       <hr />
       <div className="d-flex flex-column">
         <img alt="Sample" src={product?.img} />
-        <h2>{product?.name}</h2>
+        <h2 data-cy="product-name">{product?.name}</h2>
         <p>{product?.description}</p>
         <p>{product?.price}</p>
         <p>{product?.stock}</p>

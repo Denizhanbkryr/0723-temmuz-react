@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CounterDisplay from "./CounterDisplay";
 
 import "./Counter.css";
@@ -6,16 +6,18 @@ import "./Counter.css";
 
 const Counter = (props) => {
   // useState Hook = function - Component Datası ve setter methodu oluşturur
-  const [sayac, setSayac] = useState(100);
+  const [sayac, setSayac] = useState(100); // stateler immutable
 
   // Object Destructuring
-  const { userName } = props;
+  const { userName, childDatasiniCek } = props;
 
-  console.log("Counter props: ", props);
+  console.log(
+    "Counter comopnent fonksiyonu yeniden çalıştırıldı! Yaaani, Counter Componenti Rerender edildi!"
+  );
 
   const arttirAction = (e) => {
     setSayac(sayac + 1);
-    console.log("+ butonuna tıklandı!", sayac);
+    console.log("+ butonuna tıklandı!", sayac); // 100
   };
 
   const azaltAction = (e) => {
@@ -28,6 +30,10 @@ const Counter = (props) => {
   };
 
   console.log("Counter componenti render edildi! ", sayac);
+
+  useEffect(() => {
+    childDatasiniCek(sayac);
+  }, [sayac]);
 
   return (
     <CounterDisplay

@@ -24,6 +24,7 @@ const ProductsPage = ({ products }) => {
     <div>
       <h2>Products Page | filtered by: {filterText}</h2>
       <hr />
+      <a href="#merhaba">merhaba bölümü</a>
       <Input
         placeholder="Write to filter..."
         className="mb-2"
@@ -64,6 +65,7 @@ const ProductsPage = ({ products }) => {
             </Card>
           ))}
       </div>
+      <div id="merhaba">merhaba</div>
       <Modal isOpen={showModal} toggle={toggle} centered>
         <ModalHeader toggle={toggle}>Ürün Sepete Eklendi!</ModalHeader>
         <ModalBody>Ne de güzel eklendi...</ModalBody>

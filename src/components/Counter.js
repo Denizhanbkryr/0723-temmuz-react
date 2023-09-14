@@ -9,7 +9,7 @@ const Counter = (props) => {
   const [sayac, setSayac] = useState(100); // stateler immutable
 
   // Object Destructuring
-  const { userName, childDatasiniCek } = props;
+  const { id, userName, childDatasiniCek } = props;
 
   console.log(
     "Counter comopnent fonksiyonu yeniden çalıştırıldı! Yaaani, Counter Componenti Rerender edildi!"
@@ -36,7 +36,8 @@ const Counter = (props) => {
   }, [sayac]);
 
   return (
-    <CounterDisplay
+    <CounterDisplay 
+      id={id}
       sayac={sayac}
       userName={userName}
       arttirAction={arttirAction}

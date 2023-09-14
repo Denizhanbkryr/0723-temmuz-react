@@ -14,10 +14,15 @@ const CounterPage = ({ userName }) => {
     <div>
       <h2>Counter Page | Sayaç: {childData}</h2>
       <hr />
+      <a href="#counter-component">Counter comp</a>
       <Button onClick={() => setShow(!show)}> Toggle Counter </Button>
       {/* Conditional Rendering */}
       {show && (
-        <Counter userName={userName} childDatasiniCek={childDatasiniCek} />
+        <Counter
+          id="counter-component"
+          userName={userName}
+          childDatasiniCek={childDatasiniCek}
+        />
       )}
     </div>
   );

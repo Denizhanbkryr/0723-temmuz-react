@@ -5,9 +5,10 @@ import ProductsPage from "../pages/ProductsPage";
 import ProductsDetailPage from "../pages/ProductsDetailPage";
 import LoginPage from "../pages/LoginPage";
 import CreateProductPage from "../pages/CreateProductPage";
+import LoginHookPage from "../pages/LoginHookPage";
 
 const PageContent = ({ userName, products }) => {
-  console.log(PI)
+  console.log(PI);
   return (
     // Page Componentleri
     <div className="page-content">
@@ -27,7 +28,7 @@ const PageContent = ({ userName, products }) => {
           <ProductsDetailPage products={products} />
         </Route>
         <Route path="/login" exact>
-          <LoginPage />
+          <LoginHookPage />
         </Route>
         <Route path="/create-product" exact>
           <CreateProductPage />

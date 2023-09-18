@@ -3,6 +3,9 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import Main from "./layout/Main";
 import axios from "axios";
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 // App Componenti - Root Component
 function App() {
@@ -24,7 +27,10 @@ function App() {
     // Componentin Template Bölümü
     // HTML değil JSX dili!
     // Layout Componentleri
-    <Main userName={userName} products={products} />
+    <>
+      <Main userName={userName} products={products} />
+      <ToastContainer position="bottom-center" />
+    </>
   );
 }
 

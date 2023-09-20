@@ -6,6 +6,7 @@ import ProductsDetailPage from "../pages/ProductsDetailPage";
 import LoginPage from "../pages/LoginPage";
 import CreateProductPage from "../pages/CreateProductPage";
 import LoginHookPage from "../pages/LoginHookPage";
+import LoginPageWithCustomHook from "../pages/LoginPageWithCustomHook";
 
 const PageContent = ({ userName, products }) => {
   console.log(PI);
@@ -29,6 +30,9 @@ const PageContent = ({ userName, products }) => {
         </Route>
         <Route path="/login" exact>
           <LoginHookPage />
+        </Route>
+        <Route path="/login-custom-hook" exact>
+          <LoginPageWithCustomHook />
         </Route>
         <Route path="/create-product" exact>
           <CreateProductPage />

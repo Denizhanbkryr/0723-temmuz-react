@@ -18,6 +18,9 @@ const SideBar = () => {
       <NavLink to="/login" exact>
         Login
       </NavLink>
+      <NavLink to="/login-custom-hook" exact>
+        Login Custom Hook
+      </NavLink>
     </div>
   );
 };

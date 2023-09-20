@@ -33,10 +33,10 @@ const ProductsPage = ({ products }) => {
       />
       <div className="d-flex flex-wrap">
         {products
-          .filter((p) =>
+          ?.filter((p) =>
             p.name.toLocaleLowerCase().includes(filterText.toLocaleLowerCase())
           )
-          .map((product, i) => (
+          ?.map((product, i) => (
             <Card
               className="me-2 mb-2"
               style={{

@@ -64,7 +64,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
+    "@testing-library/user-event": "^14.5.1",
     "cypress": "^13.1.0"
   },
   "scripts": {
@@ -121,7 +121,8 @@
     "modulePaths": [],
     "moduleNameMapper": {
       "^react-native$": "react-native-web",
-      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
+      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
+      "axios": "axios/dist/node/axios.cjs"
     },
     "moduleFileExtensions": [
       "web.js",

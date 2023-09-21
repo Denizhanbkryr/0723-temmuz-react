@@ -49,6 +49,7 @@ const LoginForm = () => {
             }}
             register={register}
             invalid={!!errors.email?.message}
+            data-testid="email-input"
           />
           <FormFeedback>{errors.email?.message}</FormFeedback>
         </FormGroup>
@@ -72,12 +73,18 @@ const LoginForm = () => {
             }}
             register={register}
             invalid={!!errors.password?.message}
+            data-testid="pass-input"
           />
           <FormFeedback>{errors.password?.message}</FormFeedback>
         </FormGroup>
         <FormGroup>
           <Label>Remember Me:</Label>
-          <FormInput type="checkbox" name={"rememberMe"} register={register} />
+          <FormInput
+            type="checkbox"
+            name={"rememberMe"}
+            register={register}
+            data-testid="remember-me-input"
+          />
         </FormGroup>
 
         <Input
@@ -85,6 +92,7 @@ const LoginForm = () => {
           formNoValidate="formnovalidate"
           value="Log in"
           disabled={!isValid}
+          data-testid="login-submit-btn"
         />
       </Form>
     </div>

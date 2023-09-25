@@ -21,7 +21,8 @@ const productsReducer = (state, action) => {
 
   switch (type) {
     case "SET_PRODUCTS":
-      return payload;
+      if (Array.isArray(payload)) return payload;
+      else return state;
       break;
 
     case "REMOVE_PRODUCT":
@@ -31,6 +32,7 @@ const productsReducer = (state, action) => {
       return [...state.filter((product) => product.id !== payload.id), payload];
 
     default:
+      return state;
       break;
   }
 };
@@ -73,6 +75,16 @@ const ProductsWithReducerPage = (props) => {
         }}
       >
         Add Product
+      </Button>
+      <Button
+        onClick={() => {
+          dispatchProducts({
+            type: "SET_PRODUCTS",
+            payload: "asdas",
+          });
+        }}
+      >
+        Set Products
       </Button>
       <a href="#merhaba">merhaba bölümü</a>
       <Input

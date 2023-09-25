@@ -1,6 +1,7 @@
 import { Button } from "reactstrap";
 import Counter from "../components/Counter";
 import { useState } from "react";
+import CounterWithReducer from "../components/CounterWithReducer";
 
 const CounterPage = ({ userName }) => {
   const [show, setShow] = useState(true);
@@ -24,6 +25,9 @@ const CounterPage = ({ userName }) => {
           childDatasiniCek={childDatasiniCek}
         />
       )}
+      <h2>Counter With Reducer </h2>
+      <hr />
+      <CounterWithReducer id="counter-component" />
     </div>
   );
 };

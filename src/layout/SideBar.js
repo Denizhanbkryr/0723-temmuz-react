@@ -9,6 +9,9 @@ const SideBar = () => {
       <NavLink to="/products" exact>
         Ürünler
       </NavLink>
+      <NavLink to="/products-reducer" exact>
+        Ürünler useReducer Hook
+      </NavLink>
       <NavLink to="/create-product" exact>
         Yeni Ürün Ekle
       </NavLink>

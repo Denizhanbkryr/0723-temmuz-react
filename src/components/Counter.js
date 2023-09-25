@@ -26,7 +26,7 @@ const Counter = (props) => {
   };
 
   const resetAction = () => {
-    setSayac(100);
+    setSayac("Ali");
   };
 
   console.log("Counter componenti render edildi! ", sayac);
@@ -36,7 +36,7 @@ const Counter = (props) => {
   }, [sayac]);
 
   return (
-    <CounterDisplay 
+    <CounterDisplay
       id={id}
       sayac={sayac}
       userName={userName}

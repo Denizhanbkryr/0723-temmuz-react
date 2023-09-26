@@ -8,6 +8,8 @@ import { Spinner } from "reactstrap";
 
 import "react-toastify/dist/ReactToastify.css";
 import useLocalStorage from "./hooks/useLocalStorage";
+import { useDispatch } from "react-redux";
+import { setProductsAction } from "./store/reducers/productReducer";
 
 // App Componenti - Root Component
 function App() {
@@ -18,13 +20,17 @@ function App() {
     "get",
     "https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products"
   );
+  const dispatch = useDispatch();
 
   const [theme, setTheme] = useLocalStorage("theme", "light");
 
   // Props Drilling
 
   useEffect(() => {
-    getProducts();
+    getProducts().then((newProducts) => {
+      // todo: dispatch set products action
+      dispatch(setProductsAction(newProducts));
+    });
   }, []);
 
   return (
@@ -35,7 +41,7 @@ function App() {
       <div className="products-loading" style={{ bottom: "120px" }}>
         Theme: {theme}
       </div>
-      <Main userName={userName} products={products} />
+      <Main userName={userName} />
       <ToastContainer position="bottom-center" />
       {productsLoading && (
         <div className="products-loading">

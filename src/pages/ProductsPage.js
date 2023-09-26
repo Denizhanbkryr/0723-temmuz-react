@@ -13,10 +13,13 @@ import {
   ModalHeader,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const ProductsPage = ({ products }) => {
+const ProductsPage = ({}) => {
   const [showModal, setShowModal] = useState(false);
   const [filterText, setFilterText] = useState("");
+
+  const products = useSelector((store) => store.products);
 
   const toggle = () => setShowModal(!showModal);
 

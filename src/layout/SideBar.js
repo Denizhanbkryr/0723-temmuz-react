@@ -1,13 +1,28 @@
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { Button, Input } from "reactstrap";
+import { changeTitleAction } from "../store/reducers/siteReducer";
+import { useState } from "react";
 
 const SideBar = () => {
+  const title = useSelector((store) => store.site.title);
+  const dispatch = useDispatch();
+  const productsLength = useSelector((store) => store.products.length);
+
+  const [newTitle, setNewTitle] = useState(title);
+
+  const changeTitle = () => {
+    // todo: dispach changeTitleAction ı gönder, içine de newTitle değerini ver
+    dispatch(changeTitleAction(newTitle));
+  };
+
   return (
     <div className="side-bar">
       <NavLink to="/" exact>
         Ana Sayfa
       </NavLink>
       <NavLink to="/products" exact>
-        Ürünler
+        Ürünler [{productsLength}]
       </NavLink>
       <NavLink to="/products-reducer" exact>
         Ürünler useReducer Hook
@@ -24,6 +39,14 @@ const SideBar = () => {
       <NavLink to="/login-custom-hook" exact>
         Login Custom Hook
       </NavLink>
+      <div className="mt-5 d-flex flex-column">
+        <Input
+          type="text"
+          value={newTitle}
+          onChange={(e) => setNewTitle(e.target.value)}
+        />
+        <Button onClick={changeTitle}>Change Title</Button>
+      </div>
     </div>
   );
 };

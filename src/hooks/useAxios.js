@@ -8,12 +8,16 @@ export const useAxios = (reqType, endpoint, payload) => {
 
   const doRequest = () => {
     setLoading(true);
-    setTimeout(() => {
-      axios[reqType](endpoint, payload)
-        .then((res) => setData(res.data))
-        .catch((err) => setErr(err))
-        .finally(() => setLoading(false));
-    }, 2000);
+    return axios[reqType](endpoint, payload)
+      .then((res) => {
+        setData(res.data);
+        return res.data;
+      })
+      .catch((err) => {
+        setErr(err);
+        throw err;
+      })
+      .finally(() => setLoading(false));
   };
 
   return [data, doRequest, loading, err];

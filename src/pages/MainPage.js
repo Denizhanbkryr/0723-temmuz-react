@@ -1,4 +1,8 @@
+import { useSelector } from "react-redux";
+
 const MainPage = () => {
+  const title = useSelector((store) => store.site.title);
+
   return (
     <div>
       <h2>Main Page</h2>
@@ -27,6 +31,7 @@ const MainPage = () => {
         cras pulvinar. Eleifend mi in nulla posuere sollicitudin aliquam
         ultrices sagittis orci.
       </p>
+      <h4>{title}</h4>
     </div>
   );
 };

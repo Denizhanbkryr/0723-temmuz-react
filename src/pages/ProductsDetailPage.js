@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { Button } from "reactstrap";
 
-const ProductsDetailPage = ({ products }) => {
+const ProductsDetailPage = ({}) => {
   const [product, setProduct] = useState(null);
   const { productId } = useParams();
   const history = useHistory();
+  const products = useSelector((store) => store.products);
 
   const navBack = () => {
     // todo: go back previous URL in history
@@ -14,18 +16,18 @@ const ProductsDetailPage = ({ products }) => {
     // history.push("/products");
   };
 
-  // useEffect(() => {
-  //   const pro = products?.find((p) => p.id === productId);
-  //   setProduct(pro);
-  // }, [productId, products]);
-
   useEffect(() => {
-    axios
-      .get(
-        `https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products/${productId}`
-      )
-      .then((res) => setProduct(res.data));
-  }, [productId]);
+    const pro = products?.find((p) => p.id === productId);
+    setProduct(pro);
+  }, [productId, products]);
+
+  // useEffect(() => {
+  // axios
+  //   .get(
+  //     `https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products/${productId}`
+  //   )
+  //   .then((res) => setProduct(res.data));
+  // }, [productId]);
 
   return (
     <div>

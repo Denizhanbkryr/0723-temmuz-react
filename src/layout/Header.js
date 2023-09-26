@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { Button, Input } from "reactstrap";
 import useInput from "../hooks/useInput";
 import useLocalStorage from "../hooks/useLocalStorage";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [savedUserName, setSavedUserName] = useLocalStorage("user-name", "");
   const [userName, inputChangeHandler] = useInput("");
+  const title = useSelector((store) => store.site.title);
 
   const saveUserName = () => {
     setSavedUserName(userName);
@@ -17,7 +19,9 @@ const Header = () => {
 
   return (
     <header className="page-header">
-      <h1>Sayfama hoş geldiniz {savedUserName}...</h1>
+      <h1>
+        {title} {savedUserName}...
+      </h1>
       {!savedUserName && (
         <div className="d-flex">
           <Input

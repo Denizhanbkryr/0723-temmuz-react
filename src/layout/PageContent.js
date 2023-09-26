@@ -1,15 +1,14 @@
 import { Route, Switch } from "react-router-dom";
-import CounterPage, { PI, name } from "../pages/CounterPage";
+import CounterPage, { PI } from "../pages/CounterPage";
 import MainPage from "../pages/MainPage";
 import ProductsPage from "../pages/ProductsPage";
 import ProductsDetailPage from "../pages/ProductsDetailPage";
-import LoginPage from "../pages/LoginPage";
 import CreateProductPage from "../pages/CreateProductPage";
 import LoginHookPage from "../pages/LoginHookPage";
 import LoginPageWithCustomHook from "../pages/LoginPageWithCustomHook";
 import ProductsWithReducerPage from "../pages/ProductsWithReducerPage";
 
-const PageContent = ({ userName, products }) => {
+const PageContent = ({ userName }) => {
   console.log(PI);
   return (
     // Page Componentleri
@@ -24,13 +23,13 @@ const PageContent = ({ userName, products }) => {
           <form></form>
         </Route>
         <Route path="/products" exact>
-          <ProductsPage products={products} />
+          <ProductsPage />
         </Route>
         <Route path="/products-reducer" exact>
-          <ProductsWithReducerPage products={products} />
+          <ProductsWithReducerPage />
         </Route>
         <Route path="/products/:productId" exact>
-          <ProductsDetailPage products={products} />
+          <ProductsDetailPage />
         </Route>
         <Route path="/login" exact>
           <LoginHookPage />

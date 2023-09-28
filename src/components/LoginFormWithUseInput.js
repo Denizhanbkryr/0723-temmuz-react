@@ -1,14 +1,18 @@
 import { Form, FormGroup, Input, Label } from "reactstrap";
 import useInput from "../hooks/useInput";
+import { useDispatch } from "react-redux";
+import { setUserAction } from "../store/reducers/siteReducer";
 
 const LoginFormWithUseInput = () => {
   const [email, emailHandler] = useInput("");
   const [password, passwordHandler] = useInput("");
   const [rememberMe, rememberMeHandler] = useInput(false);
+  const dispatch = useDispatch();
 
   const onFormSubmit = (e) => {
     e.preventDefault();
     console.log({ email, password, rememberMe });
+    dispatch(setUserAction({ email: email, role: "admin", name: "Ali" }));
   };
 
   return (

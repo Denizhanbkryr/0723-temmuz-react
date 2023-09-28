@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   Button,
   Form,
@@ -9,6 +10,7 @@ import {
   Label,
 } from "reactstrap";
 import * as Yup from "yup";
+import { addProductAction } from "../store/reducers/productReducer";
 
 const ekMalzemeler = [
   "biber",
@@ -41,6 +43,7 @@ const productDataInitial = {
 // AirBnb Eslint Kuralları
 
 const ProductFormYup = () => {
+  const dispatch = useDispatch();
   const [productData, setProductData] = useState(productDataInitial);
   const [formErrors, setFormErrors] = useState({
     name: "",
@@ -93,15 +96,17 @@ const ProductFormYup = () => {
 
   const productSubmitHandler = (e) => {
     e.preventDefault();
-    axios
-      .post(
-        "https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products",
-        productData
-      )
-      .then((res) => {
-        console.log("Ürün başarıyla eklendi: ", res.data);
-        setProductData(productDataInitial);
-      });
+    dispatch(addProductAction(productData));
+
+    // axios
+    //   .post(
+    //     "https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products",
+    //     productData
+    //   )
+    //   .then((res) => {
+    //     console.log("Ürün başarıyla eklendi: ", res.data);
+    //     setProductData(productDataInitial);
+    //   });
   };
 
   const ekMalzemeChangeHandler = (e) => {

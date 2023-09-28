@@ -1,27 +1,27 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Button,
-  Card,
-  CardBody,
-  CardSubtitle,
-  CardText,
-  CardTitle,
   Input,
   Modal,
   ModalBody,
   ModalFooter,
   ModalHeader,
 } from "reactstrap";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+
+import { useDispatch, useSelector } from "react-redux";
+import ProductCard from "../components/ProductCard";
+import { removeProductAction } from "../store/reducers/productReducer";
 
 const ProductsPage = ({}) => {
   const [showModal, setShowModal] = useState(false);
   const [filterText, setFilterText] = useState("");
+  const dispatch = useDispatch();
 
   const products = useSelector((store) => store.products);
 
   const toggle = () => setShowModal(!showModal);
+
+  const deleteProduct = (productId) => dispatch(removeProductAction(productId));
 
   return (
     <div>
@@ -40,32 +40,12 @@ const ProductsPage = ({}) => {
             p.name.toLocaleLowerCase().includes(filterText.toLocaleLowerCase())
           )
           ?.map((product, i) => (
-            <Card
-              className="me-2 mb-2"
-              style={{
-                width: "18rem",
-              }}
-              key={`product-card-${i}`}
-            >
-              <img alt="Sample" src={product.img} />
-              <CardBody>
-                <CardTitle tag="h5">{product.name}</CardTitle>
-                <CardSubtitle className="mb-2 text-muted" tag="h6">
-                  {product.price} TL
-                </CardSubtitle>
-                <CardText>{product.description}</CardText>
-                <Button color="primary" onClick={toggle}>
-                  Sepete Ekle
-                </Button>
-                <Link
-                  to={"/products/" + product.id}
-                  className="ml-2"
-                  data-cy="incele-link"
-                >
-                  İncele
-                </Link>
-              </CardBody>
-            </Card>
+            <ProductCard
+              product={product}
+              key={i}
+              toggle={toggle}
+              deleteProduct={deleteProduct}
+            />
           ))}
       </div>
       <div id="merhaba">merhaba</div>

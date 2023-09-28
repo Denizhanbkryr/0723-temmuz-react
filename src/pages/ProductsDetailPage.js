@@ -1,14 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { Button } from "reactstrap";
+import { removeProductAction } from "../store/reducers/productReducer";
 
 const ProductsDetailPage = ({}) => {
   const [product, setProduct] = useState(null);
   const { productId } = useParams();
   const history = useHistory();
   const products = useSelector((store) => store.products);
+  const dispatch = useDispatch();
 
   const navBack = () => {
     // todo: go back previous URL in history
@@ -29,6 +31,10 @@ const ProductsDetailPage = ({}) => {
   //   .then((res) => setProduct(res.data));
   // }, [productId]);
 
+  const deleteProduct = () => {
+    dispatch(removeProductAction(product?.id));
+  };
+
   return (
     <div>
       <h2>
@@ -44,6 +50,11 @@ const ProductsDetailPage = ({}) => {
         <p>{product?.description}</p>
         <p>{product?.price}</p>
         <p>{product?.stock}</p>
+        <div>
+          <Button color="danger" onClick={deleteProduct}>
+            Sil
+          </Button>
+        </div>
       </div>
     </div>
   );

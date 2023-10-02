@@ -3,13 +3,13 @@ import Header from "./Header";
 import PageContent from "./PageContent";
 import SideBar from "./SideBar";
 
-const Main = ({ userName  }) => {
+const Main = ({}) => {
   return (
     <div className="main-layout">
       <Header />
       <div className="page-body">
         <SideBar />
-        <PageContent userName={userName} />
+        <PageContent />
       </div>
       <Footer />
     </div>

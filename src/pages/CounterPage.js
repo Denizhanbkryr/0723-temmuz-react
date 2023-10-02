@@ -1,11 +1,14 @@
 import { Button } from "reactstrap";
 import Counter from "../components/Counter";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import CounterWithReducer from "../components/CounterWithReducer";
+import CounterWithContext from "../components/CounterWithContext";
+import { SiteGlobalContext } from "../context/SiteGlobalProvider";
 
-const CounterPage = ({ userName }) => {
+const CounterPage = ({}) => {
   const [show, setShow] = useState(true);
   const [childData, setChildData] = useState();
+  const { userName } = useContext(SiteGlobalContext);
 
   const childDatasiniCek = (data) => {
     setChildData(data);
@@ -13,21 +16,26 @@ const CounterPage = ({ userName }) => {
 
   return (
     <div>
-      <h2>Counter Page | Sayaç: {childData}</h2>
+      <h2>
+        Counter Page | {userName} Sayaç: {childData}
+      </h2>
       <hr />
-      <a href="#counter-component">Counter comp</a>
-      <Button onClick={() => setShow(!show)}> Toggle Counter </Button>
+      {/* <a href="#counter-component">Counter comp</a>
+      <Button onClick={() => setShow(!show)}> Toggle Counter </Button> */}
       {/* Conditional Rendering */}
-      {show && (
+      {/* {show && (
         <Counter
           id="counter-component"
           userName={userName}
           childDatasiniCek={childDatasiniCek}
         />
-      )}
-      <h2>Counter With Reducer </h2>
+      )} */}
+      {/* <h2>Counter With Reducer </h2>
+      <hr /> */}
+      {/* <CounterWithReducer id="counter-component" /> */}
+      <h2>Counter With Context</h2>
       <hr />
-      <CounterWithReducer id="counter-component" />
+      <CounterWithContext />
     </div>
   );
 };

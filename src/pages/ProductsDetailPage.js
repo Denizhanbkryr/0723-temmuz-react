@@ -3,13 +3,16 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { Button } from "reactstrap";
-import { removeProductAction } from "../store/reducers/productReducer";
+import {
+  deleteProductActionCreator,
+  removeProductAction,
+} from "../store/reducers/productReducer";
 
 const ProductsDetailPage = ({}) => {
   const [product, setProduct] = useState(null);
   const { productId } = useParams();
   const history = useHistory();
-  const products = useSelector((store) => store.products);
+  const products = useSelector((store) => store.products.list);
   const dispatch = useDispatch();
 
   const navBack = () => {
@@ -32,7 +35,7 @@ const ProductsDetailPage = ({}) => {
   // }, [productId]);
 
   const deleteProduct = () => {
-    dispatch(removeProductAction(product?.id));
+    dispatch(deleteProductActionCreator(product?.id));
   };
 
   return (

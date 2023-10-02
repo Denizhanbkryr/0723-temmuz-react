@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Button,
   Input,
@@ -10,23 +10,48 @@ import {
 
 import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "../components/ProductCard";
-import { removeProductAction } from "../store/reducers/productReducer";
+import {
+  FETCH_STATES,
+  deleteProductActionCreator,
+  fetchProductsActionCreator,
+  removeProductAction,
+} from "../store/reducers/productReducer";
+import SpinnerButton from "../components/atoms/SpinnerButton";
 
 const ProductsPage = ({}) => {
   const [showModal, setShowModal] = useState(false);
   const [filterText, setFilterText] = useState("");
   const dispatch = useDispatch();
 
-  const products = useSelector((store) => store.products);
+  const products = useSelector((store) => store.products.list);
+  const productsFetchState = useSelector((store) => store.products.fetchState);
 
   const toggle = () => setShowModal(!showModal);
 
-  const deleteProduct = (productId) => dispatch(removeProductAction(productId));
+  const deleteProduct = (productId) =>
+    dispatch(deleteProductActionCreator(productId));
+
+  const fetchProducts = () => dispatch(fetchProductsActionCreator());
+
+  useEffect(() => {
+    if (productsFetchState === FETCH_STATES.NotFetched) {
+      fetchProducts();
+    }
+  }, []);
 
   return (
     <div>
       <h2>Products Page | filtered by: {filterText}</h2>
       <hr />
+      <SpinnerButton
+        onClick={fetchProducts}
+        color="success"
+        size="lg"
+        loading={productsFetchState === FETCH_STATES.Fetching}
+      >
+        <i className="fa-solid fa-download me-2" />
+        Ürünleri Yeniden Yükle
+      </SpinnerButton>
       <a href="#merhaba">merhaba bölümü</a>
       <Input
         placeholder="Write to filter..."

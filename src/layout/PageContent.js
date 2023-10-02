@@ -8,14 +8,14 @@ import LoginHookPage from "../pages/LoginHookPage";
 import LoginPageWithCustomHook from "../pages/LoginPageWithCustomHook";
 import ProductsWithReducerPage from "../pages/ProductsWithReducerPage";
 
-const PageContent = ({ userName }) => {
+const PageContent = ({  }) => {
   console.log(PI);
   return (
     // Page Componentleri
     <div className="page-content">
       <Switch>
         <Route path="/counter">
-          <CounterPage userName={userName} />
+          <CounterPage  />
         </Route>
         <Route path="/products/edit">
           <h1>Ürün Düzenleme Sayfası</h1>

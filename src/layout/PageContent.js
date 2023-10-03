@@ -7,15 +7,16 @@ import CreateProductPage from "../pages/CreateProductPage";
 import LoginHookPage from "../pages/LoginHookPage";
 import LoginPageWithCustomHook from "../pages/LoginPageWithCustomHook";
 import ProductsWithReducerPage from "../pages/ProductsWithReducerPage";
+import ProtectedPage from "../pages/ProtectedPage";
 
-const PageContent = ({  }) => {
+const PageContent = ({}) => {
   console.log(PI);
   return (
     // Page Componentleri
     <div className="page-content">
       <Switch>
         <Route path="/counter">
-          <CounterPage  />
+          <ProtectedPage PageComponent={CounterPage} fromURL={"/counter"} />
         </Route>
         <Route path="/products/edit">
           <h1>Ürün Düzenleme Sayfası</h1>
@@ -38,7 +39,10 @@ const PageContent = ({  }) => {
           <LoginPageWithCustomHook />
         </Route>
         <Route path="/create-product" exact>
-          <CreateProductPage />
+          <ProtectedPage
+            PageComponent={CreateProductPage}
+            fromURL={"/create-product"}
+          />
         </Route>
         <Route path="/" exact>
           <MainPage />

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { BASE_URL } from "../../api/api";
+import { API, BASE_URL } from "../../api/api";
 
 export const FETCH_STATES = {
   NotFetched: "NOT_FETCHED",
@@ -67,8 +67,7 @@ export const setProductFetchState = (fetchState) => ({
 
 export const fetchProductsActionCreator = () => (dispatch, getState) => {
   dispatch(setProductFetchState(FETCH_STATES.Fetching));
-  axios
-    .get(`${BASE_URL}/products`)
+  API.get(`/products`)
     .then((res) => {
       dispatch(setProductsAction(res.data));
       dispatch(setProductFetchState(FETCH_STATES.Fetched));
@@ -95,3 +94,4 @@ export const deleteProductActionCreator =
         );
       });
   };
+

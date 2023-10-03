@@ -15,6 +15,7 @@ import {
   setProductsAction,
 } from "./store/reducers/productReducer";
 import { SiteGlobalContext } from "./context/SiteGlobalProvider";
+import { API, renewAPI } from "./api/api";
 
 // App Componenti - Root Component
 function App() {
@@ -40,6 +41,16 @@ function App() {
     //   dispatch(setProductsAction(newProducts));
     // });
     // dispatch(fetchProductsActionCreator());
+
+    API.get("verify/me")
+      .then((res) => {
+        localStorage.setItem("token", res.token);
+        renewAPI();
+      })
+      .catch((err) => {
+        localStorage.removeItem("token");
+        renewAPI();
+      });
   }, []);
 
   return (

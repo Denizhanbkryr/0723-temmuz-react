@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
@@ -11,49 +10,29 @@ import {
 } from "reactstrap";
 import * as Yup from "yup";
 import { addProductAction } from "../store/reducers/productReducer";
+import { useAxios } from "../hooks/useAxios";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 
-const ekMalzemeler = [
-  "biber",
-  "kırmızı biber",
-  "mantar",
-  "zeytin",
-  "sucuk",
-  "salam",
-  "sosis",
-  "susam",
-  "peynir",
-  "kaşar peyniri",
-  "cheddar peyniri",
-  "ton balığı",
-];
-
-const productDataInitial = {
-  name: "",
-  description: "",
-  img: "",
-  price: 0,
-  stock: 0,
-  ekMalzemeler: [],
-};
-
-// Static Test
-// Kod yazımı esnasında yapılan hata kontrollerine linting deniyor
-// JS linting işlemini yapan uygulama ESLint
-// let productDataInitial = "qasd";
-// AirBnb Eslint Kuralları
-
-const ProductFormYup = () => {
+const ProductFormYup = ({ productInitial, productFormSubmit }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
-  const [productData, setProductData] = useState(productDataInitial);
+  const [productData, setProductData] = useState({
+    name: "",
+    description: "",
+    img: "",
+    price: 0,
+    stock: 0,
+  });
   const [formErrors, setFormErrors] = useState({
     name: "",
     description: "",
     img: "",
     price: "",
     stock: "",
-    ekMalzemeler: "",
   });
   const [isValid, setValid] = useState(false);
+  const [saveProduct, saveProductData, saveLoasing] = useAxios();
 
   const productFormSchema = Yup.object().shape({
     name: Yup.string()
@@ -71,10 +50,6 @@ const ProductFormYup = () => {
       }
     ),
     stock: Yup.number().positive("Stok bilgisi pozitif sayı olmalıdır."),
-    ekMalzemeler: Yup.array().max(
-      3,
-      "En fazla 3 adet ek malzeme seçebilirsiniz!"
-    ),
   });
 
   const inputChangeHandler = (event) => {
@@ -96,48 +71,35 @@ const ProductFormYup = () => {
 
   const productSubmitHandler = (e) => {
     e.preventDefault();
-    dispatch(addProductAction(productData));
-
-    // axios
-    //   .post(
-    //     "https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products",
-    //     productData
-    //   )
-    //   .then((res) => {
-    //     console.log("Ürün başarıyla eklendi: ", res.data);
-    //     setProductData(productDataInitial);
-    //   });
-  };
-
-  const ekMalzemeChangeHandler = (e) => {
-    // form state güncelleme ********************
-    const { value, checked } = e.target;
-
-    const malzemeler = [...productData.ekMalzemeler];
-
-    if (checked) {
-      malzemeler.push(value);
-    } else {
-      malzemeler.splice(malzemeler.indexOf(value), 1);
-    }
-
-    setProductData({ ...productData, ekMalzemeler: malzemeler });
-
-    // YUP Form data validate ************************
-
-    Yup.reach(productFormSchema, "ekMalzemeler")
-      .validate(malzemeler)
-      .then((valid) => {
-        if (formErrors.ekMalzemeler)
-          setFormErrors({ ...formErrors, ekMalzemeler: "" });
-      })
-      .catch((err) => {
-        setFormErrors({ ...formErrors, ekMalzemeler: err.errors[0] });
+    // dispatch(addProductAction(productData));
+    if (productData.id) {
+      // update product
+      saveProduct({
+        reqType: "put",
+        endpoint: `products/${productData.id}`,
+        payload: productData,
+      }).then((resData) => {
+        toast.success("Kayıt başarıyla güncellendi!");
+        dispatch(addProductAction(resData));
+        setTimeout(() => {
+          history.goBack();
+        });
       });
+    } else {
+      // create product
+      saveProduct({
+        reqType: "post",
+        endpoint: `products`,
+        payload: productData,
+      });
+    }
   };
 
   useEffect(() => {
-    console.log("productData > ", productData);
+    setProductData(productInitial);
+  }, [productInitial]);
+
+  useEffect(() => {
     productFormSchema.isValid(productData).then((valid) => setValid(valid));
   }, [productData]);
 
@@ -206,27 +168,6 @@ const ProductFormYup = () => {
           invalid={!!formErrors.stock}
         />
         <FormFeedback>{formErrors.stock}</FormFeedback>
-      </FormGroup>
-
-      <FormGroup>
-        {ekMalzemeler.map((malzeme) => (
-          <Label className="w-50" key={malzeme}>
-            <Input
-              type="checkbox"
-              onChange={ekMalzemeChangeHandler}
-              value={malzeme}
-              checked={productData.ekMalzemeler.includes(malzeme)}
-            />
-            {malzeme}
-          </Label>
-        ))}
-        <div
-          className={`invalid-feedback  ${
-            formErrors.ekMalzemeler ? "d-block" : ""
-          }`}
-        >
-          {formErrors.ekMalzemeler}
-        </div>
       </FormGroup>
 
       <Button type="submit" color="primary" disabled={!isValid}>

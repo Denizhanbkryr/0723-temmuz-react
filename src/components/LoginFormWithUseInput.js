@@ -33,7 +33,12 @@ const LoginFormWithUseInput = () => {
       <Form onSubmit={onFormSubmit}>
         <FormGroup>
           <Label>Kullanıcı:</Label>
-          <Input type="email" name={"email"} onChange={emailHandler} />
+          <Input
+            type="email"
+            name={"email"}
+            value={email}
+            onChange={emailHandler}
+          />
         </FormGroup>
         <FormGroup>
           <Label>Password:</Label>

@@ -26,17 +26,28 @@ const ProductCard = ({ product, toggle, deleteProduct }) => {
           {product.price} TL
         </CardSubtitle>
         <CardText>{product.description}</CardText>
-        <Button color="primary" onClick={toggle}>
+        <Button color="primary" className="me-2" onClick={toggle}>
           Sepete Ekle
         </Button>
+        <Link
+          to={"/edit-product/" + product.id}
+          className="btn btn-primary ml-2"
+          data-cy="incele-link"
+        >
+          Düzenle
+        </Link>
         {isAdmin && (
-          <Button color="danger" onClick={() => deleteProduct(product.id)}>
+          <Button
+            color="danger"
+            className="me-2"
+            onClick={() => deleteProduct(product.id)}
+          >
             Sil
           </Button>
         )}
         <Link
           to={"/products/" + product.id}
-          className="ml-2"
+          className="btn btn-primary me-2"
           data-cy="incele-link"
         >
           İncele

@@ -1,14 +1,15 @@
 import axios from "axios";
 import { useState } from "react";
+import { API } from "../api/api";
 
-export const useAxios = (reqType, endpoint, payload) => {
-  const [loading, setLoading] = useState(false);
+export const useAxios = () => {
   const [data, setData] = useState();
   const [err, setErr] = useState();
+  const [loading, setLoading] = useState(false);
 
-  const doRequest = () => {
+  const doRequest = ({ reqType, endpoint, payload, config }) => {
     setLoading(true);
-    return axios[reqType](endpoint, payload)
+    return API[reqType](endpoint, payload, config)
       .then((res) => {
         setData(res.data);
         return res.data;
@@ -20,5 +21,5 @@ export const useAxios = (reqType, endpoint, payload) => {
       .finally(() => setLoading(false));
   };
 
-  return [data, doRequest, loading, err];
+  return [doRequest, data, loading, err];
 };

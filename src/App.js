@@ -23,10 +23,8 @@ function App() {
   const { theme } = useContext(SiteGlobalContext);
 
   // const [products, setProducts] = useState([]);
-  // const [products, getProducts, productsLoading, productsErr] = useAxios(
-  //   "get",
-  //   "https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products"
-  // );
+  const [getProducts, products, productsLoading2, productsErr] = useAxios();
+
   const dispatch = useDispatch();
 
   const productsLoading = useSelector(
@@ -36,10 +34,14 @@ function App() {
   // Props Drilling
 
   useEffect(() => {
-    // getProducts().then((newProducts) => {
-    //   // todo: dispatch set products action
-    //   dispatch(setProductsAction(newProducts));
-    // });
+    getProducts({
+      reqType: "get",
+      endpoint: "products",
+    }).then((newProducts) => {
+      console.log("useAxios hook u ile yakalanan data: ", newProducts);
+      // todo: dispatch set products action
+      dispatch(setProductsAction(newProducts));
+    });
     // dispatch(fetchProductsActionCreator());
 
     API.get("verify/me")

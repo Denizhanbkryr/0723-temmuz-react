@@ -22,9 +22,20 @@ export function productReducer(state = productsInitial, action) {
       return { ...state, list: payload };
 
     case "ADD_PRODUCT_ADMIN_RIGHT":
+      const pList = [...state.list];
+      let found = false;
+      pList.forEach((p, i) => {
+        if (p.id === payload.id) {
+          pList[i] = payload;
+          found = true;
+        }
+      });
+      if (!found) {
+        pList.push(payload);
+      }
       return {
         ...state,
-        list: [...state.list.filter((p) => p.id !== payload.id), payload],
+        list: [...pList],
       };
 
     case "REMOVE_PRODUCT_ADMIN_RIGHT":

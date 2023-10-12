@@ -15,7 +15,7 @@ const LoginForm = () => {
       password: "",
       rememberMe: false,
     },
-    mode: "all",
+    mode: "onChange",
   });
 
   const onFormSubmit = (formData) => {
@@ -39,6 +39,7 @@ const LoginForm = () => {
           <Label>Kullanıcı:</Label>
           <FormInput
             type="email"
+            register={register}
             name={"email"}
             validations={{
               required: "Email alanı zorunludur!",
@@ -47,7 +48,6 @@ const LoginForm = () => {
                 message: "Email adresi geçerli değildir.",
               },
             }}
-            register={register}
             invalid={!!errors.email?.message}
             data-testid="email-input"
           />
@@ -57,6 +57,7 @@ const LoginForm = () => {
           <Label>Password:</Label>
           <FormInput
             type="password"
+            register={register}
             name={"password"}
             validations={{
               required: "Password alanı zorunludur.",
@@ -71,7 +72,6 @@ const LoginForm = () => {
                   "Şifreniz büyük harf, küçük harf, sayı ve özel karakter içermelidir.",
               },
             }}
-            register={register}
             invalid={!!errors.password?.message}
             data-testid="pass-input"
           />
@@ -91,7 +91,7 @@ const LoginForm = () => {
           type="submit"
           formNoValidate="formnovalidate"
           value="Log in"
-          disabled={!isValid}
+          disabled={false}
           data-testid="login-submit-btn"
         />
       </Form>

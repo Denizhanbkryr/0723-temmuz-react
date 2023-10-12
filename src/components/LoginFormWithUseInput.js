@@ -25,7 +25,7 @@ const LoginFormWithUseInput = () => {
       "kd8hVmOk=WTY5Rh9NGgw-tts7LQx6i-!zhFEBu64IpRQ2jqtDaiPpgMiqaNLa?qY"
     );
     renewAPI();
-    history.push(location.state.referrer);
+    history.push(location.state?.referrer || "/");
   };
 
   return (

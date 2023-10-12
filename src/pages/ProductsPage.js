@@ -34,9 +34,7 @@ const ProductsPage = ({}) => {
   const fetchProducts = () => dispatch(fetchProductsActionCreator());
 
   useEffect(() => {
-    if (productsFetchState === FETCH_STATES.NotFetched) {
-      fetchProducts();
-    }
+    fetchProducts();
   }, []);
 
   return (

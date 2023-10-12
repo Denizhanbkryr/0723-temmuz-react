@@ -77,24 +77,26 @@ export const setProductFetchState = (fetchState) => ({
 // ACTION CREATORS ***********************
 
 export const fetchProductsActionCreator = () => (dispatch, getState) => {
-  dispatch(setProductFetchState(FETCH_STATES.Fetching));
-  API.get(`/products`)
-    .then((res) => {
-      dispatch(setProductsAction(res.data));
-      dispatch(setProductFetchState(FETCH_STATES.Fetched));
-    })
-    .catch((err) => {
-      toast.error(
-        "Products datası çekilirken bir hata ile karşılaşıldır! " + err.message
-      );
-      dispatch(setProductFetchState(FETCH_STATES.FetchFailed));
-    });
+  if (getState().products.fetchState === FETCH_STATES.NotFetched) {
+    dispatch(setProductFetchState(FETCH_STATES.Fetching));
+    API.get(`/products`)
+      .then((res) => {
+        dispatch(setProductsAction(res.data));
+        dispatch(setProductFetchState(FETCH_STATES.Fetched));
+      })
+      .catch((err) => {
+        toast.error(
+          "Products datası çekilirken bir hata ile karşılaşıldır! " +
+            err.message
+        );
+        dispatch(setProductFetchState(FETCH_STATES.FetchFailed));
+      });
+  }
 };
 
 export const deleteProductActionCreator =
   (productId) => (dispatch, getState) => {
-    axios
-      .delete(`${BASE_URL}/products/${productId}`)
+    API.delete(`/products/${productId}`)
       .then((res) => {
         dispatch(removeProductAction(productId));
       })
